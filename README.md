@@ -5,7 +5,7 @@
 
 # BurgerSample
 
-*Burger Please!* 스타일의 캐주얼 모바일 게임 프로토타입입니다.  
+캐주얼 게임 프로토타입입니다.  
 스토브에서 버거를 집어 카운터에 전달하면 자동으로 판매되는 게임 루프를 구현했습니다.
 
 ![게임스샷](ScreenShot/burger_screenshot.jpg)
@@ -87,6 +87,14 @@ Assets/Scripts/
 
 ## 개발 환경
 
-- **Unity** 6000.3.8f1
+- **Unity** 6000.3.8f1 URP
 - **Input System** 패키지
 - **TextMeshPro**
+
+---
+
+## 그래픽 리소스
+
+- **https://poly.pizza/**
+- Restaurant Bits by Kay Lousberg via Poly Pizza
+- CUTES Part One by J-Toastie [CC-BY] via Poly Pizza
