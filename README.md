@@ -87,9 +87,7 @@ Assets/Scripts/
 
 ## 개발 환경
 
-- **Unity** 6000.3.8f1 URP
-- **Input System** 패키지
-- **TextMeshPro**
+- **Unity** 6000.3.8f1 **URP**
 
 ---
 
