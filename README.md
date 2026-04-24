@@ -8,7 +8,7 @@
 *Burger Please!* 스타일의 캐주얼 모바일 게임 프로토타입입니다.  
 스토브에서 버거를 집어 카운터에 전달하면 자동으로 판매되는 게임 루프를 구현했습니다.
 
-![게임스샷](Screenshots/burger_screenshot.jpg)
+![게임스샷](ScreenShot/burger_screenshot.jpg)
 
 ---
 
