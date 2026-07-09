@@ -1,4 +1,5 @@
 using TMPro;
+using RKit.ActionSpot;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,8 +12,7 @@ public class HUD_Panel : MonoBehaviour
 
     public static HUD_Panel Instance { get; private set; }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Awake()
     {
         if (Instance == null)
             Instance = this;
@@ -20,13 +20,30 @@ public class HUD_Panel : MonoBehaviour
             Destroy(gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
+        if (Instance != this)
+            return;
 
+        PlayerData.ResourceChanged += HandleResourceChanged;
+        UpdateCoinText(PlayerData.Money);
     }
 
-    public void UpdateCoinText(int coinCount)
+    private void OnDisable()
+    {
+        if (Instance != this)
+            return;
+
+        PlayerData.ResourceChanged -= HandleResourceChanged;
+    }
+
+    private void HandleResourceChanged(ResourceType resourceType, long amount)
+    {
+        if (resourceType == ResourceType.Money)
+            UpdateCoinText(amount);
+    }
+
+    public void UpdateCoinText(long coinCount)
     {
         if (CoinText != null)
             CoinText.text = coinCount.ToString("N0");
