@@ -22,6 +22,13 @@ public class Counter : MonoBehaviour, IInteractable
 
     private void Start()
     {
+        if (config == null)
+        {
+            Debug.LogError($"{nameof(Counter)} requires a counter config.", this);
+            enabled = false;
+            return;
+        }
+
         if (servingPoint == null)
         {
             GameObject servingObj = new GameObject("ServingPoint");
@@ -81,7 +88,8 @@ public class Counter : MonoBehaviour, IInteractable
 
     private void SellBurger()
     {
-        if (burgersOnCounter.Count == 0 || customerManager == null || !customerManager.HasWaitingCustomer)
+        if (burgersOnCounter.Count == 0 || customerManager == null ||
+            !customerManager.HasWaitingCustomer || BurgerPool.Instance == null)
             return;
 
         if (!customerManager.TryServeNextCustomer())

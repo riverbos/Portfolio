@@ -2,15 +2,14 @@ using UnityEngine;
 
 public class CustomerModelRandomizer : MonoBehaviour
 {
-    [SerializeField] private GameObject[] modelPrefabs = new GameObject[0];
     [SerializeField] private Transform modelRoot;
     [SerializeField] private RuntimeAnimatorController animatorController;
     [SerializeField] private bool randomizeOnAwake = true;
-    [SerializeField] private int selectedModelIndex = -1;
     [SerializeField] private float initialSpeed;
 
     private GameObject currentModel;
     private Animator currentAnimator;
+    private int requestVersion;
 
     public Animator Animator => currentAnimator;
     public GameObject CurrentModel => currentModel;
@@ -19,27 +18,19 @@ public class CustomerModelRandomizer : MonoBehaviour
     {
         if (randomizeOnAwake)
             RandomizeModel();
-        else
-            SetModel(selectedModelIndex);
     }
 
     [ContextMenu("Randomize Model")]
     public void RandomizeModel()
     {
-        if (modelPrefabs == null || modelPrefabs.Length == 0)
-            return;
-
-        SetModel(Random.Range(0, modelPrefabs.Length));
+        int currentRequestVersion = ++requestVersion;
+        CustomerModelProvider.Instance.RequestRandomModel(
+            prefab => OnModelLoaded(prefab, currentRequestVersion));
     }
 
-    public void SetModel(int modelIndex)
+    private void OnModelLoaded(GameObject prefab, int completedRequestVersion)
     {
-        if (modelPrefabs == null || modelPrefabs.Length == 0)
-            return;
-
-        selectedModelIndex = Mathf.Clamp(modelIndex, 0, modelPrefabs.Length - 1);
-        GameObject prefab = modelPrefabs[selectedModelIndex];
-        if (prefab == null)
+        if (this == null || completedRequestVersion != requestVersion || prefab == null)
             return;
 
         ClearCurrentModel();
@@ -58,6 +49,11 @@ public class CustomerModelRandomizer : MonoBehaviour
             currentAnimator.runtimeAnimatorController = animatorController;
 
         SetMoveSpeed(initialSpeed);
+    }
+
+    private void OnDestroy()
+    {
+        requestVersion++;
     }
 
     private void ClearCurrentModel()

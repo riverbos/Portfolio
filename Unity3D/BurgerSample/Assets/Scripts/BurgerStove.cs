@@ -21,6 +21,13 @@ public class BurgerStove : MonoBehaviour, IInteractable
 
     private void Start()
     {
+        if (config == null)
+        {
+            Debug.LogError($"{nameof(BurgerStove)} requires a stove config.", this);
+            enabled = false;
+            return;
+        }
+
         if (BurgerPool.Instance == null)
         {
             Debug.LogError("BurgerPool이 씬에 없습니다!");
@@ -108,6 +115,9 @@ public class BurgerStove : MonoBehaviour, IInteractable
     {
         Vector3 spawnPosition = spawnPoint.position + Vector3.up * (burgersOnStove.Count * config.burgerHeight);
         GameObject newBurger = BurgerPool.Instance.Get();
+        if (newBurger == null)
+            return;
+
         newBurger.transform.position = spawnPosition;
         newBurger.transform.SetParent(transform);
         burgersOnStove.Add(newBurger);

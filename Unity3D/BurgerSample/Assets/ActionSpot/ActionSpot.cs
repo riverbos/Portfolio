@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -15,32 +16,61 @@ namespace RKit.ActionSpot
 
         private float accumulator;
         private long paid;
-        private bool playerInside;
         private bool completed;
         private IActionSpotResourceProvider resourceProvider;
+        private readonly HashSet<Collider> playerColliders = new HashSet<Collider>();
 
         public ActionSpotConfig Config => config;
 
         private void Start()
         {
+            if (config == null || ui == null || config.requiredAmount < 1 || config.chargeRatePerSecond <= 0f)
+            {
+                Debug.LogError($"{nameof(ActionSpot)} requires valid config values and a UI reference.", this);
+                enabled = false;
+                return;
+            }
+
             ui.Initialize(config.resourceType, config.requiredAmount);
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!other.CompareTag("Player")) return;
-            resourceProvider = other.GetComponent<IActionSpotResourceProvider>();
-            playerInside = true;
+            if (!other.CompareTag("Player"))
+                return;
+
+            IActionSpotResourceProvider provider = other.GetComponentInParent<IActionSpotResourceProvider>();
+            if (provider == null)
+                return;
+
+            playerColliders.Add(other);
+            resourceProvider = provider;
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag("Player")) playerInside = false;
+            if (!other.CompareTag("Player"))
+                return;
+
+            playerColliders.Remove(other);
+            if (playerColliders.Count == 0)
+            {
+                resourceProvider = null;
+                accumulator = 0f;
+            }
+        }
+
+        private void OnDisable()
+        {
+            playerColliders.Clear();
+            resourceProvider = null;
+            accumulator = 0f;
         }
 
         private void Update()
         {
-            if (!playerInside || completed || resourceProvider == null) return;
+            if (playerColliders.Count == 0 || completed || resourceProvider == null)
+                return;
 
             accumulator += Time.deltaTime;
             if (accumulator >= 1f / config.chargeRatePerSecond)
@@ -49,7 +79,7 @@ namespace RKit.ActionSpot
                 if (resourceProvider.ConsumeResource(config.resourceType))
                 {
                     paid++;
-                    OnCharged.Invoke();
+                    OnCharged?.Invoke();
                 }
             }
 
@@ -59,7 +89,7 @@ namespace RKit.ActionSpot
             {
                 completed = true;
                 ui.SetCompleted();
-                OnCompleted.Invoke();
+                OnCompleted?.Invoke();
                 Destroy(gameObject, 0.2f);
             }
         }

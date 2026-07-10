@@ -67,20 +67,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ed4ccf8d6b34b4fa375f8a1f64c1ad9, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomerModelRandomizer
-  modelPrefabs:
-  - {fileID: 919132149155446097, guid: 60ec39faad2e45c4f9ddc884bb1af594, type: 3}
-  - {fileID: 919132149155446097, guid: 977cf40d018f9454d85d2a6b3b3ae89d, type: 3}
-  - {fileID: 919132149155446097, guid: 0b41975b9260be7449c97ebdcc72417d, type: 3}
-  - {fileID: 919132149155446097, guid: f1c712365b2d49a448005cd62bd21b83, type: 3}
-  - {fileID: 919132149155446097, guid: 4fcea8824d1673b41896d8b53e07dc95, type: 3}
-  - {fileID: 919132149155446097, guid: c6dbec4f16b35244dad960e84052f4f0, type: 3}
-  - {fileID: 919132149155446097, guid: a9f2642dcc5e4634eb9525ffab40c1d6, type: 3}
   modelRoot: {fileID: 0}
   animatorController: {fileID: 9100000, guid: 7200db54017d7f14688f687a975c79f0, type: 2}
   randomizeOnAwake: 1
-  selectedModelIndex: -1
   initialSpeed: 0
 --- !u!114 &100004
 MonoBehaviour:

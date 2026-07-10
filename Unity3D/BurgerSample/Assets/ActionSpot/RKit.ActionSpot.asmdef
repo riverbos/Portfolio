@@ -1,0 +1,8 @@
+{
+    "name": "RKit.ActionSpot",
+    "rootNamespace": "RKit.ActionSpot",
+    "references": [
+        "Unity.TextMeshPro",
+        "UnityEngine.UI"
+    ]
+}

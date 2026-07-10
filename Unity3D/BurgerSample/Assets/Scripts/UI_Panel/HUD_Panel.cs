@@ -16,8 +16,10 @@ public class HUD_Panel : MonoBehaviour
     {
         if (Instance == null)
             Instance = this;
-        else
+        else if (Instance != this)
+        {
             Destroy(gameObject);
+        }
     }
 
     private void OnEnable()
@@ -35,6 +37,12 @@ public class HUD_Panel : MonoBehaviour
             return;
 
         PlayerData.ResourceChanged -= HandleResourceChanged;
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+            Instance = null;
     }
 
     private void HandleResourceChanged(ResourceType resourceType, long amount)

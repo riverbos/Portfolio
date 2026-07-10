@@ -35,3 +35,9 @@ Before opening a pull request, run relevant Edit Mode or Play Mode tests and man
 Recent history uses short, descriptive commit subjects. Keep commits focused and write summaries in either Korean or English, for example `README update` or `Add burger pool interaction`. Avoid mixing unrelated asset, scene, and code changes in one commit.
 
 Pull requests should include a concise description, affected scenes or prefabs, test results, and screenshots or short clips for visible gameplay/UI changes. Link related issues when available and call out any required Unity version or package changes.
+
+## Git Operations
+Do not run Git commands or access `.git` during normal project work. This includes status checks, diffs, logs, commits, branches, and other repository operations. Only perform Git-related work when the user explicitly requests it; if Git access appears necessary for another task, ask for permission first.
+
+## Line Endings
+Save text files with Windows CRLF (`\r\n`) line endings. After applying patches or using tools that emit Unix LF endings, normalize every modified text file to CRLF before completing the task.

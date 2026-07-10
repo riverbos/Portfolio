@@ -22,7 +22,6 @@ public class CharacterAnimationController : MonoBehaviour
     private readonly string speedParameterName = "Speed";
     private readonly string isRunningParameterName = "IsRunning";
     private readonly string turnParameterName = "TurnDirection";
-    private readonly string jumpTriggerName = "Jump";
 
     // 내부 상태 변수
     private float currentSpeed = 0f;

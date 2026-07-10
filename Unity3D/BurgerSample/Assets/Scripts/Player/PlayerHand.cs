@@ -28,6 +28,15 @@ public class PlayerHand : MonoBehaviour
     private GameObject itemCountUI;
     private TextMesh itemCountText;
 
+    private void Awake()
+    {
+        if (config != null)
+            return;
+
+        Debug.LogError($"{nameof(PlayerHand)} requires a player config.", this);
+        enabled = false;
+    }
+
     private void Start()
     {
         if (handPoint == null)
@@ -107,10 +116,15 @@ public class PlayerHand : MonoBehaviour
 
     private IEnumerator CapacityBoostRoutine()
     {
-        HUD_Panel.Instance.ShowCarryUp(true);
+        if (HUD_Panel.Instance != null)
+            HUD_Panel.Instance.ShowCarryUp(true);
+
         bonusCapacity = config.capacityBoostAmount;
         yield return new WaitForSeconds(config.capacityBoostDuration);
-        HUD_Panel.Instance.ShowCarryUp(false);
+
+        if (HUD_Panel.Instance != null)
+            HUD_Panel.Instance.ShowCarryUp(false);
+
         bonusCapacity = 0;
         capacityBoostCoroutine = null;
     }
@@ -130,7 +144,12 @@ public class PlayerHand : MonoBehaviour
     {
         foreach (GameObject item in itemsInHand)
         {
-            if (item != null)
+            if (item == null)
+                continue;
+
+            if (item.TryGetComponent(out BurgerItem _) && BurgerPool.Instance != null)
+                BurgerPool.Instance.Return(item);
+            else
                 Destroy(item);
         }
         itemsInHand.Clear();

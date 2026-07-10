@@ -16,5 +16,13 @@ namespace RKit.ActionSpot
 
         [Header("충전 속도 (초당 소모량)")]
         [Min(0.1f)] public float chargeRatePerSecond = 10f;
+
+        private void OnValidate()
+        {
+            if (requiredAmount < 1)
+                requiredAmount = 1;
+
+            chargeRatePerSecond = Mathf.Max(0.1f, chargeRatePerSecond);
+        }
     }
 }

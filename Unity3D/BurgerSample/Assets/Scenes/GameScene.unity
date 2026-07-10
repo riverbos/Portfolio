@@ -1177,7 +1177,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '"S" Key : Speed Boost'
+  m_text: '"G" Key : Speed Boost'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9052835038ded4e459b7ded01283c89c, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 9052835038ded4e459b7ded01283c89c, type: 2}
@@ -4087,6 +4087,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   config: {fileID: 11400000, guid: 42ee74d03db85b54c9af89d0d32aca42, type: 2}
   joystick: {fileID: 315812736}
+  cameraTransform: {fileID: 0}
 --- !u!143 &639719469
 CharacterController:
   m_ObjectHideFlags: 0
@@ -4163,6 +4164,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   interactionCooldown: 0.5
+  detectionCapacity: 32
   showDebugSphere: 0
 --- !u!114 &639719473
 MonoBehaviour:
@@ -9678,7 +9680,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1703126098}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 12, y: 0, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
