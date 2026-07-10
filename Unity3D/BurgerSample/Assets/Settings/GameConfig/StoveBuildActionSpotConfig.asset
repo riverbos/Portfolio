@@ -16,5 +16,5 @@ MonoBehaviour:
   actionName: Build Stove
   prefab: {fileID: 0}
   resourceType: 1
-  requiredAmount: 10
+  requiredAmount: 50
   chargeRatePerSecond: 5

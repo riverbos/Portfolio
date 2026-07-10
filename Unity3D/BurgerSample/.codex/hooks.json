@@ -1,0 +1,18 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "(?i)^mcp__.*unity.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .codex/hooks/check-unity-scene-dirty.mjs",
+            "commandWindows": "node .codex\\hooks\\check-unity-scene-dirty.mjs",
+            "timeout": 5,
+            "statusMessage": "Checking whether the Unity scene is saved"
+          }
+        ]
+      }
+    ]
+  }
+}

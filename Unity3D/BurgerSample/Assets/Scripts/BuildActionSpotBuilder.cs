@@ -8,6 +8,8 @@ public class BuildActionSpotBuilder : MonoBehaviour
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private GameObject existingBuildTarget;
     [SerializeField] private bool hideExistingTargetOnStart = true;
+    [SerializeField] private GameObject[] activateOnBuildTargets = new GameObject[0];
+    [SerializeField] private bool hideActivateTargetsOnStart;
     [SerializeField] private bool buildOnce = true;
 
     private GameObject builtObject;
@@ -19,6 +21,11 @@ public class BuildActionSpotBuilder : MonoBehaviour
 
         if (hideExistingTargetOnStart && existingBuildTarget != null)
             existingBuildTarget.SetActive(false);
+
+        if (hideActivateTargetsOnStart)
+        {
+            SetBuildTargetsActive(false);
+        }
     }
 
     private void OnEnable()
@@ -42,6 +49,7 @@ public class BuildActionSpotBuilder : MonoBehaviour
         {
             existingBuildTarget.SetActive(true);
             builtObject = existingBuildTarget;
+            ActivateBuildTargets();
             return;
         }
 
@@ -53,5 +61,23 @@ public class BuildActionSpotBuilder : MonoBehaviour
 
         Transform target = spawnPoint != null ? spawnPoint : transform;
         builtObject = Instantiate(buildPrefab, target.position, target.rotation);
+        ActivateBuildTargets();
+    }
+
+    private void ActivateBuildTargets()
+    {
+        SetBuildTargetsActive(true);
+    }
+
+    private void SetBuildTargetsActive(bool active)
+    {
+        if (activateOnBuildTargets == null)
+            return;
+
+        foreach (GameObject target in activateOnBuildTargets)
+        {
+            if (target != null)
+                target.SetActive(active);
+        }
     }
 }

@@ -16,5 +16,5 @@ MonoBehaviour:
   actionName: Build Table 2
   prefab: {fileID: 0}
   resourceType: 1
-  requiredAmount: 10
-  chargeRatePerSecond: 5
+  requiredAmount: 50
+  chargeRatePerSecond: 10

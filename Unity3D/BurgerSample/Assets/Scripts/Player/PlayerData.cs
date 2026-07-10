@@ -5,7 +5,7 @@ public static class PlayerData
 {
     public static event Action<ResourceType, long> ResourceChanged;
 
-    public static long Money { get; private set; } = 100;
+    public static long Money { get; private set; } = 170;
     public static long Jewel { get; private set; } = 0;
 
     public static long GetResource(ResourceType resourceType)

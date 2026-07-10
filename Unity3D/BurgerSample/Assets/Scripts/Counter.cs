@@ -17,6 +17,7 @@ public class Counter : MonoBehaviour, IInteractable
     [SerializeField] private bool debugMode = false;
 
     private readonly List<GameObject> burgersOnCounter = new List<GameObject>();
+    private CustomerManager customerManager;
     private float nextSellTime;
 
     private void Start()
@@ -73,9 +74,17 @@ public class Counter : MonoBehaviour, IInteractable
 
     public long GetCoin() => PlayerData.Money;
 
+    public void SetCustomerManager(CustomerManager manager)
+    {
+        customerManager = manager;
+    }
+
     private void SellBurger()
     {
-        if (burgersOnCounter.Count == 0)
+        if (burgersOnCounter.Count == 0 || customerManager == null || !customerManager.HasWaitingCustomer)
+            return;
+
+        if (!customerManager.TryServeNextCustomer())
             return;
 
         GameObject burger = burgersOnCounter[0];
