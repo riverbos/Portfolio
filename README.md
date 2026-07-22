@@ -109,7 +109,6 @@ Unity3D/BurgerSample/
 - Unity `6000.3.8f1`
 - Universal Render Pipeline `17.3.0`
 - Input System `1.18.0`
-- AI Navigation `2.0.10`
 - Addressables `2.7.6`
 
 Unity Hub에서 `Unity3D/BurgerSample` 폴더를 열고 `Assets/Scenes/GameScene.unity`를 Play Mode로 실행합니다.
